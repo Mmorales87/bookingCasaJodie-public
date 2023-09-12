@@ -1,0 +1,216 @@
+<!-- Booking Start -->
+<form class="container-xxl py-5" style="padding-bottom: 10rem !important;" (ngSubmit)="submitForm()"
+    #bookingForm="ngForm">
+    <div ngbAutofocus class="container">
+        <h1 style="text-align: center;">Formulario de <span class="text-primary text-uppercase">Reserva</span></h1>
+        <div class="text-center wow fadeInUp" data-wow-delay="0.1s"></div>
+
+        <div class="row g-5">
+            <div class="col-lg-6">
+                <app-calendar defaultView="dayGridMonth"></app-calendar>
+            </div>
+            <div class="col-lg-6">
+                <div class="wow fadeInUp" data-wow-delay="0.2s">
+                    <form ngNativeValidate (ngSubmit)="submitForm()">
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <select required class="form-select form-control" id="apartment"
+                                        [formControl]="apartamentoControl" [(ngModel)]="selectedApartment"
+                                        name="selectedApartment" (change)="onApartmentSelected()">
+                                        <option value="---" hidden></option>
+                                        <option value="0">Apartamento A</option>
+                                        <option value="1">Apartamento B</option>
+                                        <option value="2">Apartamento C</option>
+                                        <option value="3">Apartamento D</option>
+                                    </select>
+                                    <label for="apartment">Selecciona el Apartamento</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input required type="text" class="form-control" name="nombreControl"
+                                        [formControl]="nombreControl" [(ngModel)]="nombre" id="nombre"
+                                        placeholder="Tu nombre">
+                                    <label for="nombre">
+                                        Nombre
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input required type="text" class="form-control" name="apellidosControl"
+                                        [formControl]="apellidosControl" [(ngModel)]="apellidos" id="apellidos"
+                                        placeholder="Tus apellidos">
+                                    <label for="apellidos">
+                                        Apellidos
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input required type="email" class="form-control" name="emailControl"
+                                        [formControl]="emailControl" [(ngModel)]="email" id="email"
+                                        placeholder="Tu email">
+                                    <label for="email">
+                                        Email
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input required type="number" class="form-control" name="telefonoControl"
+                                        [formControl]="telefonoControl" [(ngModel)]="telefono" id="telefono"
+                                        placeholder="Tu telefono">
+                                    <label for="telefono">
+                                        Teléfono
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <select required class="form-select form-control" name="adultosControl"
+                                        [formControl]="adultosControl" [(ngModel)]="adultos" id="adultos">
+                                        <option value="0" hidden></option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                    </select>
+                                    <label for="select1">Adultos</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <select required class="form-select form-control" name="menoresControl"
+                                        [formControl]="menoresControl" [(ngModel)]="menores" id="menores">
+                                        <option value="0" hidden></option>
+                                        <option value="0">0</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                    </select>
+                                    <label for="select2">Menores de 16</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating date" id="date3" data-target-input="nearest">
+                                    <input type="date" class="form-control datetimepicker-input" name="checkin"
+                                        [(ngModel)]="checkin" id="checkin" placeholder="Check In" data-target="#date3"
+                                        data-toggle="datetimepicker" [formControl]="checkinControl" name="checkin"
+                                        [min]="minDate" />
+                                    <label for="checkin">Llegada</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating date" id="date4" data-target-input="nearest">
+                                    <input type="date" class="form-control datetimepicker-input" name="checkout"
+                                        [(ngModel)]="checkout" id="checkout" placeholder="Check Out"
+                                        data-target="#date4" data-toggle="datetimepicker" required
+                                        [formControl]="checkoutControl" name="checkout" [min]="checkin"
+                                        [disabled]="isInvalidDateRange()" />
+                                    <label for="checkout">Salida</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <textarea class="form-control" placeholder="Comentarios" name="comentarios"
+                                        [(ngModel)]="comentarios" id="comentarios" name="comentarios"
+                                        style="height: 100px"></textarea>
+                                    <label for="message">Comentarios</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <button class="btn btn-primary w-100 py-3" (click)="open(mymodal, invalidFormModal)"
+                                    type="button">RESERVAR</button>
+                            </div>
+
+                            <!-- Modal para resumen de la reserva -->
+                            <ng-template #mymodal let-modal>
+                                <div class="modal-header">
+                                    <h4 class="modal-title" id="modal-basic-title">Resumen de la reserva</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row g-4">
+                                        <div class="col">
+                                            <strong>Apartamento:</strong>
+                                            <p>{{ getApartmentName() }}</p>
+                                            <strong>Nombre:</strong>
+                                            <p>{{ nombre }} {{ apellidos }}</p>
+                                            <strong>Email:</strong>
+                                            <p>{{ email }}</p>
+                                            <strong>Teléfono:</strong>
+                                            <p>{{ telefono }}</p>
+                                        </div>
+                                        <div class="col">
+                                            <strong>Adultos:</strong>
+                                            <p>{{ adultos }}</p>
+                                            <strong>Menores de 16:</strong>
+                                            <p>{{ menores }}</p>
+                                            <strong>Llegada:</strong>
+                                            <p> {{ checkin }}</p>
+                                            <strong>Salida:</strong>
+                                            <p> {{ checkout }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="mb-8">
+                                        <strong>Comentarios:</strong>
+                                        <p>{{ comentarios }}</p>
+                                    </div>
+                                    <ng-container *ngIf="numberOfDays >= 4">
+                                        <p><strong>Descuento:</strong>
+                                            <ng-container *ngIf="numberOfDays >= 8">
+                                                {{(discount*numberOfDays).toFixed(2)}}€ (10%)
+                                            </ng-container>
+                                            <ng-container *ngIf="numberOfDays < 8 && numberOfDays >= 4">
+                                                {{(discount*numberOfDays).toFixed(2)}}€ (5%)
+                                            </ng-container>
+                                        </p>
+                                    </ng-container>
+                                    <p><strong>Total:</strong>
+                                        {{ calculateTotal().toFixed(2) }}€ para {{ numberOfDays }} día(s)
+                                    </p>
+                                </div>
+                                <div class="modal-footer">
+                                    <div class="row g-4">
+                                        <div class="col">
+                                            <button class="btn btn-primary w-100" type="submit"
+                                                (click)="submitForm()">Aceptar</button>
+                                        </div>
+                                        <div class="col">
+                                            <button style="color: white !important;" class="btn btn-primary w-100 close"
+                                                aria-label="Close"
+                                                (click)="modal.dismiss('Cross click')">Modificar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-template>
+
+                            <!-- Modal para avisar de los campos que falta por rellenar del formulario -->
+                            <ng-template #invalidFormModal let-modal>
+                                <div class="modal-header">
+                                    <h4 class="modal-title" id="modal-basic-title">Formulario Incompleto</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Por favor, completa los siguientes campos correctamente antes de proceder:</p>
+                                    <ul>
+                                        <li *ngFor="let control of missingFields">{{ control | titlecase }}</li>
+                                    </ul>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-primary" type="button"
+                                        (click)="modal.close('Close click')">Cerrar</button>
+                                </div>
+                            </ng-template>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<!-- Booking End -->

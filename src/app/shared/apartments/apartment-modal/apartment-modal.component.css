@@ -1,0 +1,28 @@
+.image-carousel-container {
+    overflow-x: auto;
+    white-space: nowrap;
+    margin-bottom: 15px;
+}
+
+.image-carousel {
+    display: inline-flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: flex-start;
+}
+
+.services {
+    justify-content: space-between;
+    padding: 10px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+}
+
+.modal-description{
+    justify-content: space-between;
+    padding: 10px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}

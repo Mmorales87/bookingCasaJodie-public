@@ -1,0 +1,59 @@
+<div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">{{ apartment.title }}</h4>
+</div>
+<div ngbAutofocus class="modal-body">
+    <div class="image-carousel-container">
+        <div class="image-carousel ">
+            <ng-container *ngFor="let imgIndex of apartmentsImg; let i = index">
+                <img title="Pasa para ver imagenes ➡️" class="img-fluid"
+                    [src]="'../../../assets/img/apartments/Apartment' + apartment.apartmentLetters + apartment.apartmentsImg[i] +'.png'"
+                    alt="" >
+            </ng-container>
+        </div>
+    </div>
+
+    <div class="modal-description">
+        <p>{{ apartment.description }}</p>
+        <p>¡Tus peluditos son bienvenidos!</p>
+    </div>
+
+    <div class="d-flex mb-2 mt-2 services">
+        <small class="border-end me-3 pe-3">
+            <i class="fa fa-bed text-primary me-2"></i>
+            {{ apartment.bed }} camas
+        </small>
+        <small class="border-end me-3 pe-3">
+            <i class="fa fa-bath text-primary me-2">
+            </i>
+            {{ apartment.bath }} baños
+        </small>
+        <small class="border-end me-3 pe-3">
+            <i class="fa fa-wifi text-primary me-2"></i>
+            Wifi
+        </small>
+        <small>
+            <i class="fa fa-paw text-primary me-2"></i>
+            Bienvenidos
+        </small>
+    </div>
+
+    <div class="mb-2 mt-2 services">
+        <div>
+            <p>Precio por noche</p>
+        </div>
+        <div>
+            <strong style="color: #fea116;">€ {{apartment.price}}</strong>
+        </div>
+        <div style="color: rgb(195, 195, 195);">
+            <small><small>Impuestos y cargos por persona NO incluidos
+                    <br>
+                    1.57€ por persona (se paga en efectivo al anfitrión)</small></small>
+        </div>
+    </div>
+</div>
+
+<div class="modal-footer d-flex justify-content-between">
+    <button routerLink="/booking" class="btn btn-sm btn-primary rounded py-2" 
+        (click)="modal.close('Close click'); scrollToTop()" (click)="openClose(apartment)">Reservar</button>
+    <button class="btn btn-dark" type="button" (click)="modal.close('Close click')">Cerrar</button>
+</div> 

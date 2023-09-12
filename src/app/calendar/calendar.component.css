@@ -1,0 +1,44 @@
+@import '~@fullcalendar/core/main.css';
+
+.container {
+    display: flex; /* Utilizamos flexbox para alinear los elementos en línea */
+    flex-wrap: wrap; /* Permitimos que los elementos se envuelvan en filas adicionales si no hay suficiente espacio */
+    align-content: center;
+    justify-content: center;
+    flex-direction: row-reverse;
+}
+
+#calendar {
+    width: 90%;
+    max-width: 500px;
+    margin: 20px;
+    border-radius: 5px;
+    flex: 1;
+  }
+
+  .fc-button-primary{
+    background-color: red !important;
+  }
+
+
+@media screen and (min-width: 768px) {
+    .container {
+      align-items: flex-start;
+    }
+
+  
+  
+    .formulario-container {
+      width: 400px;
+    }
+  
+    #calendar {
+      flex: 1;
+      width: calc(50% - 20px);
+      padding-bottom: 50px;
+    }
+
+    .fc-header-toolbar{
+      font-size:10px !important;
+    }
+  }

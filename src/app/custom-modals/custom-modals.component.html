@@ -1,0 +1,29 @@
+
+
+
+<div *ngIf="activeModal === 'resumenReserva'">
+    <ng-template #mymodal let-modal>
+      <!-- Contenido del modal de Resumen de Reserva -->
+    </ng-template>
+  </div>
+  
+  <div *ngIf="activeModal === 'invalidForm'">
+    <!-- <ng-template #invalidFormModal let-modal>
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Formulario Incompleto</h4>
+        </div>
+        <div class="modal-body">
+            <p>Por favor, completa los siguientes campos correctamente antes de proceder:</p>
+            <ul>
+                <li *ngFor="let control of missingFields">{{ control | titlecase }}</li>
+            </ul>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button"
+                (click)="modal.close('Close click')">Cerrar</button>
+        </div>
+    </ng-template> -->
+  </div>
+
+
+  
